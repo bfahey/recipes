@@ -5,8 +5,8 @@
 //  Created by Blaine Fahey on 5/23/23.
 //
 
-import SwiftUI
 import RecipeKit
+import SwiftUI
 
 struct RecipeRow: View {
     var recipe: Recipe
@@ -17,7 +17,7 @@ struct RecipeRow: View {
             AsyncImage(url: recipe.thumbnailURL, content: { image in
                 image.resizable().clipShape(imageShape)
             }, placeholder: {
-                Color(.gray)
+                Color(.tertiarySystemFill).clipShape(imageShape)
             })
             .frame(width: 50, height: 50)
             .background(in: imageShape)
@@ -33,5 +33,6 @@ struct RecipeRow: View {
 struct RecipeRow_Previews: PreviewProvider {
     static var previews: some View {
         RecipeRow(recipe: .preview)
+        RecipeRow(recipe: .noRecipe)
     }
 }

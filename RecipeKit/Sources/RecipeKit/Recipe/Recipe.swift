@@ -52,7 +52,7 @@ extension Recipe {
 extension Recipe {
     enum CodingKeys: String, CodingKey {
         case id = "idMeal"
-        case name = "strName"
+        case name = "strMeal"
         case area = "strArea"
         case instructions = "strInstructions"
         case tags = "strTags"

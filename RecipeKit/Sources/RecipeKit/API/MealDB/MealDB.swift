@@ -1,20 +1,20 @@
 import Foundation
 
-struct MealDB: RecipeAPI {
+public struct MealDB: RecipeAPI {
     
     //https://themealdb.com/api/json/v1/1/filter.php?c=Dessert
     // https://themealdb.com/api/json/v1/1/lookup.php?i=MEAL_ID
-    static let defaultBaseURL = URL(string: "https://themealdb.com/api/json/v1/1/")!
+    public static let defaultBaseURL = URL(string: "https://themealdb.com/api/json/v1/1/")!
     
     let baseURL: URL
     let session: URLSession
     
-    init(baseURL: URL = defaultBaseURL, session: URLSession = .shared) {
+    public init(baseURL: URL = defaultBaseURL, session: URLSession = .shared) {
         self.baseURL = baseURL
         self.session = session
     }
     
-    func recipes(for category: String) async throws -> [Recipe] {
+    public func recipes(for category: String) async throws -> [Recipe] {
         assert(!category.isEmpty, "Category must not be empty")
         let url = baseURL.appending(path: "filter.php")
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
@@ -27,7 +27,7 @@ struct MealDB: RecipeAPI {
         return response.recipes
     }
     
-    func recipe(id: String) async throws -> Recipe {
+    public func recipe(id: String) async throws -> Recipe {
         return Recipe(id: "", name: "", tags: [], imageURL: URL(fileURLWithPath: ""))
     }
 }

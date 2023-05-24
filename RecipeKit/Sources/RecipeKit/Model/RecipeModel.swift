@@ -1,7 +1,7 @@
 import SwiftUI
 
 @MainActor
-final class RecipeModel: ObservableObject {
+public final class RecipeModel: ObservableObject {
     @Published public var recipes: [Recipe] = []
     
     private let api: RecipeAPI
@@ -28,5 +28,8 @@ final class RecipeModel: ObservableObject {
     public func fetchRecipe(id: String) async throws {
         
     }
-    
+}
+
+public extension RecipeModel {
+    static var preview = RecipeModel(api: MockAPI())
 }
