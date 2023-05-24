@@ -81,7 +81,10 @@ extension Recipe {
         self.id = try container.decode(String.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
         self.area = try container.decodeIfPresent(String.self, forKey: .area)
-        self.instructions = try container.decodeIfPresent(String.self, forKey: .instructions)
+        
+        let instructionsString = try container.decodeIfPresent(String.self, forKey: .instructions)
+        self.instructions = instructionsString?.replacingOccurrences(of: "\r", with: "\n")
+        
         
         if let tagString = try container.decodeIfPresent(String.self, forKey: .tags), !tagString.isEmpty {
             self.tags = tagString.components(separatedBy: ",")
@@ -122,10 +125,14 @@ extension Recipe {
             .filter { $0.stringValue.hasPrefix(prefix) }
             .sorted(by: { $0.stringValue.caseInsensitiveCompare($1.stringValue) == .orderedAscending })
             .compactMap { key in
-                guard let string = try container.decodeIfPresent(String.self, forKey: key), !string.isEmpty else {
+                guard let string = try container.decodeIfPresent(String.self, forKey: key) else {
                     return nil
                 }
-                return string.trimmingCharacters(in: .whitespacesAndNewlines)
+                let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+                guard !trimmed.isEmpty else {
+                    return nil
+                }
+                return trimmed
             }
     }
 }
