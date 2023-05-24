@@ -1,7 +1,7 @@
 import Foundation
 
 public protocol RecipeAPI {
-    func recipes(for category: String, sort: RecipeSortOrder) async throws -> [Recipe]
+    func recipes(for category: String) async throws -> [Recipe]
     func recipe(id: String) async throws -> Recipe
 }
 

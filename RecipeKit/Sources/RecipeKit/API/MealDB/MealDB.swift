@@ -14,7 +14,7 @@ struct MealDB: RecipeAPI {
         self.session = session
     }
     
-    func recipes(for category: String, sort: RecipeSortOrder) async throws -> [Recipe] {
+    func recipes(for category: String) async throws -> [Recipe] {
         assert(!category.isEmpty, "Category must not be empty")
         let url = baseURL.appending(path: "filter.php")
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
@@ -22,13 +22,13 @@ struct MealDB: RecipeAPI {
 
         let request = URLRequest(url: components.url!)
         let data = try await perform(request: request)
-        let recipes = try JSONDecoder().decode(MealDBResponse<[Recipe]>.self, from: data)
+        let response = try JSONDecoder().decode(MealDBResponse.self, from: data)
         
-        return []
+        return response.recipes
     }
     
     func recipe(id: String) async throws -> Recipe {
-        return Recipe(id: "", name: "", tags: [], thumbnailURL: URL(fileURLWithPath: ""))
+        return Recipe(id: "", name: "", tags: [], imageURL: URL(fileURLWithPath: ""))
     }
 }
 

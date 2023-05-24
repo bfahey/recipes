@@ -11,6 +11,9 @@
 		351A55E62A1D944F00B8F4C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351A55E52A1D944F00B8F4C0 /* ContentView.swift */; };
 		351A55E82A1D944F00B8F4C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 351A55E72A1D944F00B8F4C0 /* Assets.xcassets */; };
 		351A55EB2A1D944F00B8F4C0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 351A55EA2A1D944F00B8F4C0 /* Preview Assets.xcassets */; };
+		356520022A1DA79D00B7B138 /* RecipeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356520012A1DA79D00B7B138 /* RecipeList.swift */; };
+		356520052A1DA88200B7B138 /* RecipeKit in Frameworks */ = {isa = PBXBuildFile; productRef = 356520042A1DA88200B7B138 /* RecipeKit */; };
+		356520072A1DAB5700B7B138 /* RecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356520062A1DAB5700B7B138 /* RecipeRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,8 @@
 		351A55E72A1D944F00B8F4C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		351A55EA2A1D944F00B8F4C0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		351A56152A1D955300B8F4C0 /* RecipeKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RecipeKit; sourceTree = "<group>"; };
+		356520012A1DA79D00B7B138 /* RecipeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
+		356520062A1DAB5700B7B138 /* RecipeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				356520052A1DA88200B7B138 /* RecipeKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,9 +42,10 @@
 		351A55D72A1D944E00B8F4C0 = {
 			isa = PBXGroup;
 			children = (
-				351A56142A1D955300B8F4C0 /* Packages */,
 				351A55E22A1D944F00B8F4C0 /* Recipes */,
+				351A56142A1D955300B8F4C0 /* Packages */,
 				351A55E12A1D944F00B8F4C0 /* Products */,
+				356520032A1DA88200B7B138 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,6 +62,8 @@
 			children = (
 				351A55E32A1D944F00B8F4C0 /* RecipesApp.swift */,
 				351A55E52A1D944F00B8F4C0 /* ContentView.swift */,
+				356520012A1DA79D00B7B138 /* RecipeList.swift */,
+				356520062A1DAB5700B7B138 /* RecipeRow.swift */,
 				351A55E72A1D944F00B8F4C0 /* Assets.xcassets */,
 				351A55E92A1D944F00B8F4C0 /* Preview Content */,
 			);
@@ -77,6 +86,13 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		356520032A1DA88200B7B138 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,6 +109,9 @@
 			dependencies = (
 			);
 			name = Recipes;
+			packageProductDependencies = (
+				356520042A1DA88200B7B138 /* RecipeKit */,
+			);
 			productName = Recipes;
 			productReference = 351A55E02A1D944F00B8F4C0 /* Recipes.app */;
 			productType = "com.apple.product-type.application";
@@ -148,7 +167,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				351A55E62A1D944F00B8F4C0 /* ContentView.swift in Sources */,
+				356520022A1DA79D00B7B138 /* RecipeList.swift in Sources */,
 				351A55E42A1D944F00B8F4C0 /* RecipesApp.swift in Sources */,
+				356520072A1DAB5700B7B138 /* RecipeRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +378,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		356520042A1DA88200B7B138 /* RecipeKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RecipeKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 351A55D82A1D944E00B8F4C0 /* Project object */;
 }

@@ -7,18 +7,45 @@ public struct Recipe: Hashable, Identifiable, Decodable {
     public var instructions: String?
     public var tags: [String]
     public var sourceURL: URL?
-    public var thumbnailURL: URL
+    public var imageURL: URL
     public var youTubeURL: URL?
     
-    public init(id: String, name: String, area: String? = nil, instructions: String? = nil, tags: [String], sourceURL: URL? = nil, thumbnailURL: URL, youTubeURL: URL? = nil) {
+    public init(id: String, name: String, area: String? = nil, instructions: String? = nil, tags: [String], sourceURL: URL? = nil, imageURL: URL, youTubeURL: URL? = nil) {
         self.id = id
         self.name = name
         self.area = area
         self.instructions = instructions
         self.tags = tags
         self.sourceURL = sourceURL
-        self.thumbnailURL = thumbnailURL
+        self.imageURL = imageURL
         self.youTubeURL = youTubeURL
+    }
+}
+
+public extension Recipe {
+    static let noRecipe = Recipe(id: "0", name: "No Recipe", tags: [], imageURL: URL(filePath: ""))
+    
+    static let preview = Recipe(
+        id: "1",
+        name: "Carrot Cake",
+        area: "British",
+        instructions: """
+        For the carrot cake, preheat the oven to 160C/325F/Gas 3. Grease and line a 26cm/10in springform cake tin.
+        
+        Mix all of the ingredients for the carrot cake, except the carrots and walnuts, together in a bowl until well combined. Stir in the carrots and walnuts.\r\nSpoon the mixture into the cake tin and bake for 1 hour 15 minutes, or until a skewer inserted into the middle comes out clean. Remove the cake from the oven and set aside to cool for 10 minutes, then carefully remove the cake from the tin and set aside to cool completely on a cooling rack.\r\nMeanwhile, for the icing, beat the cream cheese, caster sugar and butter together in a bowl until fluffy. Spread the icing over the top of the cake with a palette knife.
+        """,
+        tags: ["Cake", "Treat", "Sweet"],
+        sourceURL: nil,
+        imageURL: URL(string: "https://www.themealdb.com/images/media/meals/vrspxv1511722107.jpg")!,
+        youTubeURL: nil
+    )
+}
+
+extension Recipe {
+    
+    /// Thumbnails are 50 x 50 pixels at 3X scale.
+    public var thumbnailURL: URL {
+        return imageURL.appending(path: "preview")
     }
 }
 
@@ -30,7 +57,7 @@ extension Recipe {
         case instructions = "strInstructions"
         case tags = "strTags"
         case sourceURL = "strSource"
-        case thumbnailURL = "strMealThumb"
+        case imageURL = "strMealThumb"
         case youTubeURL = "strYoutube"
     }
     
@@ -51,8 +78,8 @@ extension Recipe {
             self.sourceURL = URL(string: sourceString)
         }
 
-        if let thumbnailString = try container.decodeIfPresent(String.self, forKey: .thumbnailURL), let thumbnailURL = URL(string: thumbnailString) {
-            self.thumbnailURL = thumbnailURL
+        if let imageString = try container.decodeIfPresent(String.self, forKey: .imageURL), let imageURL = URL(string: imageString) {
+            self.imageURL = imageURL
         } else {
             let context = DecodingError.Context(codingPath: container.codingPath, debugDescription: "Recipe thumbnail is not a valid URL")
             throw DecodingError.valueNotFound(String.self, context)
