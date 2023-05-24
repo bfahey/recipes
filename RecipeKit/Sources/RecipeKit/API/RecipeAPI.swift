@@ -1,8 +1,8 @@
 import Foundation
 
 public protocol RecipeAPI {
-    func recipes(for category: String, sort: RecipeSortOrder) -> [Any]
-    func recipe(id: String) -> Any
+    func recipes(for category: String, sort: RecipeSortOrder) async throws -> [Recipe]
+    func recipe(id: String) async throws -> Recipe
 }
 
 public enum RecipeSortOrder: Hashable {
