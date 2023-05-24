@@ -36,7 +36,7 @@ struct RecipeList: View {
             do {
                 try await model.fetchRecipes()
             } catch {
-                // handle error
+                // FIXME: Display errors in an alert.
             }
         }
     }

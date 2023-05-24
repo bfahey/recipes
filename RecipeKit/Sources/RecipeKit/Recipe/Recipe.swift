@@ -130,27 +130,23 @@ extension Recipe {
     }
     
     private static func decodeIngredients(container: KeyedDecodingContainer<DynamicCodingKey>) throws -> [Ingredient] {
-        let names = try Self.decodeIngredientKeys(container: container, prefix: "strIngredient")
-        let measurements = try Self.decodeIngredientKeys(container: container, prefix: "strMeasure")
-        
-        return zip(names, measurements).map { name, measurent in
-            Ingredient(name: name, measurement: measurent)
-        }
-    }
-    
-    private static func decodeIngredientKeys(container: KeyedDecodingContainer<DynamicCodingKey>, prefix: String) throws -> [String] {
-        return try container.allKeys
-            .filter { $0.stringValue.hasPrefix(prefix) }
-            .sorted(by: { $0.stringValue.caseInsensitiveCompare($1.stringValue) == .orderedAscending })
-            .compactMap { key in
-                guard let string = try container.decodeIfPresent(String.self, forKey: key) else {
-                    return nil
-                }
-                let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
-                guard !trimmed.isEmpty else {
-                    return nil
-                }
-                return trimmed
+        return try (1...20).compactMap { idx in
+            guard
+                let nKey = DynamicCodingKey(stringValue: "strIngredient\(idx)"),
+                let mKey = DynamicCodingKey(stringValue: "strMeasure\(idx)"),
+                let name = try container.decodeIfPresent(String.self, forKey: nKey),
+                let measurement = try container.decodeIfPresent(String.self, forKey: mKey)
+            else {
+                return nil
             }
+            
+            let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+            let trimmedMeasurement = measurement.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !trimmedName.isEmpty, !trimmedMeasurement.isEmpty else {
+                return nil
+            }
+            
+            return Ingredient(name: trimmedName, measurement: trimmedMeasurement)
+        }
     }
 }

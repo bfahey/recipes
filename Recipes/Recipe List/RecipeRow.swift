@@ -14,6 +14,7 @@ struct RecipeRow: View {
     var body: some View {
         HStack {
             let imageShape = RoundedRectangle(cornerRadius: 4, style: .continuous)
+            /// iOS 16 seems to have a bug where AsyncImage cancels loading while in a List.
             AsyncImage(url: recipe.thumbnailURL, content: { image in
                 image.resizable().clipShape(imageShape)
             }, placeholder: {

@@ -73,7 +73,7 @@ struct RecipeDetails: View {
             do {
                 try await model.fetchRecipe(id: recipe.id)
             } catch {
-                // handle error
+                // FIXME: Display errors in an alert.
             }
         }
     }

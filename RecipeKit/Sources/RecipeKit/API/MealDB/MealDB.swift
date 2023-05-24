@@ -23,12 +23,11 @@ public struct MealDB: RecipeAPI {
 
         let request = URLRequest(url: components.url!)
         logger.debug("GET \(request)")
-        print(request)
+        
         let data = try await perform(request: request)
         let response = try JSONDecoder().decode(MealDBResponse.self, from: data)
         logger.debug("Loaded \(response.recipes.count) recipes")
-        print(response.recipes)
-        
+
         return response.recipes
     }
     
@@ -40,7 +39,6 @@ public struct MealDB: RecipeAPI {
 
         let request = URLRequest(url: components.url!)
         logger.debug("GET \(request)")
-        print(request)
         
         let data = try await perform(request: request)
         let response = try JSONDecoder().decode(MealDBResponse.self, from: data)
@@ -49,7 +47,6 @@ public struct MealDB: RecipeAPI {
             throw RecipeError.server("Recipe not found.")
         }
         logger.debug("Found \(first.name)")
-        print(first)
         
         return first
     }
