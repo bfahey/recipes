@@ -19,6 +19,7 @@
 		351A55E52A1D944F00B8F4C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		351A55E72A1D944F00B8F4C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		351A55EA2A1D944F00B8F4C0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		351A56152A1D955300B8F4C0 /* RecipeKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RecipeKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +36,7 @@
 		351A55D72A1D944E00B8F4C0 = {
 			isa = PBXGroup;
 			children = (
+				351A56142A1D955300B8F4C0 /* Packages */,
 				351A55E22A1D944F00B8F4C0 /* Recipes */,
 				351A55E12A1D944F00B8F4C0 /* Products */,
 			);
@@ -65,6 +67,14 @@
 				351A55EA2A1D944F00B8F4C0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		351A56142A1D955300B8F4C0 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				351A56152A1D955300B8F4C0 /* RecipeKit */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
