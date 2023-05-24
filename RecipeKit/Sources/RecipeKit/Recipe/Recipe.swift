@@ -23,7 +23,6 @@ public struct Recipe: Hashable, Identifiable, Decodable {
 }
 
 public extension Recipe {
-    static let noRecipe = Recipe(id: "0", name: "No Recipe", tags: [], imageURL: URL(filePath: ""))
     
     static let preview = Recipe(
         id: "1",

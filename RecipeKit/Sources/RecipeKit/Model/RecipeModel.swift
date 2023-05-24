@@ -10,8 +10,8 @@ public final class RecipeModel: ObservableObject {
         self.api = api
     }
     
-    public func recipe(id: Recipe.ID) -> Recipe {
-        recipes.first(where: { $0.id == id }) ?? Recipe.noRecipe
+    public func recipe(id: Recipe.ID) -> Recipe? {
+        recipes.first(where: { $0.id == id })
     }
     
     public func recipes(sortedBy sort: RecipeSortOrder = .name) -> [Recipe] {

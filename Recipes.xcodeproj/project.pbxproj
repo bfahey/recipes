@@ -14,6 +14,7 @@
 		356520022A1DA79D00B7B138 /* RecipeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356520012A1DA79D00B7B138 /* RecipeList.swift */; };
 		356520052A1DA88200B7B138 /* RecipeKit in Frameworks */ = {isa = PBXBuildFile; productRef = 356520042A1DA88200B7B138 /* RecipeKit */; };
 		356520072A1DAB5700B7B138 /* RecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356520062A1DAB5700B7B138 /* RecipeRow.swift */; };
+		356520092A1DB27900B7B138 /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356520082A1DB27900B7B138 /* RecipeDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		351A56152A1D955300B8F4C0 /* RecipeKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RecipeKit; sourceTree = "<group>"; };
 		356520012A1DA79D00B7B138 /* RecipeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
 		356520062A1DAB5700B7B138 /* RecipeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRow.swift; sourceTree = "<group>"; };
+		356520082A1DB27900B7B138 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				351A55E32A1D944F00B8F4C0 /* RecipesApp.swift */,
 				351A55E52A1D944F00B8F4C0 /* ContentView.swift */,
 				356520012A1DA79D00B7B138 /* RecipeList.swift */,
+				356520082A1DB27900B7B138 /* RecipeDetails.swift */,
 				356520062A1DAB5700B7B138 /* RecipeRow.swift */,
 				351A55E72A1D944F00B8F4C0 /* Assets.xcassets */,
 				351A55E92A1D944F00B8F4C0 /* Preview Content */,
@@ -169,6 +172,7 @@
 				351A55E62A1D944F00B8F4C0 /* ContentView.swift in Sources */,
 				356520022A1DA79D00B7B138 /* RecipeList.swift in Sources */,
 				351A55E42A1D944F00B8F4C0 /* RecipesApp.swift in Sources */,
+				356520092A1DB27900B7B138 /* RecipeDetails.swift in Sources */,
 				356520072A1DAB5700B7B138 /* RecipeRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

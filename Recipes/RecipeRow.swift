@@ -33,6 +33,5 @@ struct RecipeRow: View {
 struct RecipeRow_Previews: PreviewProvider {
     static var previews: some View {
         RecipeRow(recipe: .preview)
-        RecipeRow(recipe: .noRecipe)
     }
 }
