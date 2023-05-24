@@ -22,6 +22,20 @@ public struct Recipe: Hashable, Identifiable, Decodable {
         self.youTubeURL = youTubeURL
         self.ingredients = ingredients
     }
+    
+    public func matches(searchText: String) -> Bool {
+        if searchText.isEmpty {
+            return true
+        }
+        
+        if name.localizedCaseInsensitiveContains(searchText) {
+            return true
+        }
+        
+        return ingredients.contains { ingredient in
+            ingredient.name.localizedCaseInsensitiveContains(searchText)
+        }
+    }
 }
 
 public extension Recipe {

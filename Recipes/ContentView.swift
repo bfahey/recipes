@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var model: RecipeModel
-    @SceneStorage("selection") private var selectedRecipeID: Recipe.ID?
 
     var body: some View {
         NavigationStack {

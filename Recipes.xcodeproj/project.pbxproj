@@ -32,6 +32,7 @@
 		356520082A1DB27900B7B138 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		35E4A9AA2A1E390A00C2E3A0 /* IngredientRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientRow.swift; sourceTree = "<group>"; };
 		35E4A9AC2A1E641A00C2E3A0 /* InstructionStepRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionStepRow.swift; sourceTree = "<group>"; };
+		35E4A9AE2A1E6A7E00C2E3A0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +50,7 @@
 		351A55D72A1D944E00B8F4C0 = {
 			isa = PBXGroup;
 			children = (
+				35E4A9AE2A1E6A7E00C2E3A0 /* README.md */,
 				351A55E22A1D944F00B8F4C0 /* Recipes */,
 				351A56142A1D955300B8F4C0 /* Packages */,
 				351A55E12A1D944F00B8F4C0 /* Products */,
@@ -70,11 +72,8 @@
 				3533AC802A1DCA8B00742345 /* Info.plist */,
 				351A55E32A1D944F00B8F4C0 /* RecipesApp.swift */,
 				351A55E52A1D944F00B8F4C0 /* ContentView.swift */,
-				35E4A9AA2A1E390A00C2E3A0 /* IngredientRow.swift */,
-				35E4A9AC2A1E641A00C2E3A0 /* InstructionStepRow.swift */,
-				356520012A1DA79D00B7B138 /* RecipeList.swift */,
-				356520082A1DB27900B7B138 /* RecipeDetails.swift */,
-				356520062A1DAB5700B7B138 /* RecipeRow.swift */,
+				35E4A9B02A1E8E8300C2E3A0 /* Recipe Details */,
+				35E4A9AF2A1E8E7C00C2E3A0 /* Recipe List */,
 				351A55E72A1D944F00B8F4C0 /* Assets.xcassets */,
 				351A55E92A1D944F00B8F4C0 /* Preview Content */,
 			);
@@ -102,6 +101,25 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		35E4A9AF2A1E8E7C00C2E3A0 /* Recipe List */ = {
+			isa = PBXGroup;
+			children = (
+				356520012A1DA79D00B7B138 /* RecipeList.swift */,
+				356520062A1DAB5700B7B138 /* RecipeRow.swift */,
+			);
+			path = "Recipe List";
+			sourceTree = "<group>";
+		};
+		35E4A9B02A1E8E8300C2E3A0 /* Recipe Details */ = {
+			isa = PBXGroup;
+			children = (
+				356520082A1DB27900B7B138 /* RecipeDetails.swift */,
+				35E4A9AA2A1E390A00C2E3A0 /* IngredientRow.swift */,
+				35E4A9AC2A1E641A00C2E3A0 /* InstructionStepRow.swift */,
+			);
+			path = "Recipe Details";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

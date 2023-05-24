@@ -11,9 +11,12 @@ import SwiftUI
 struct RecipeList: View {
     @EnvironmentObject var model: RecipeModel
     @State private var sort = RecipeSortOrder.name
+    @State private var searchText = ""
     
     var sortedRecipes: [Recipe] {
-        model.recipes(sortedBy: sort)
+        model.recipes(sortedBy: sort).filter { recipe in
+            recipe.matches(searchText: searchText)
+        }
     }
     
     var body: some View {
@@ -28,6 +31,7 @@ struct RecipeList: View {
         .navigationDestination(for: Recipe.self) { recipe in
             RecipeDetails(recipe: model.recipeBinding(id: recipe.id))
         }
+        .searchable(text: $searchText)
         .task {
             do {
                 try await model.fetchRecipes()
