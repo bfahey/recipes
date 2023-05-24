@@ -100,9 +100,20 @@ extension Recipe {
         self.name = try container.decode(String.self, forKey: .name)
         self.area = try container.decodeIfPresent(String.self, forKey: .area)
         
-        var instructionsString = try container.decodeIfPresent(String.self, forKey: .instructions)
-        instructionsString = instructionsString?.replacingOccurrences(of: "\n", with: "")
-        self.instructions = instructionsString?.components(separatedBy: "\r") ?? []
+        if let instructionsString = try container.decodeIfPresent(String.self, forKey: .instructions) {
+            self.instructions = instructionsString
+                .replacingOccurrences(of: "\n", with: "")
+                .components(separatedBy: "\r")
+                .compactMap { step in
+                    let trimmed = step.trimmingCharacters(in: .whitespacesAndNewlines)
+                    if trimmed == "" || trimmed.isEmpty {
+                        return nil
+                    }
+                    return trimmed
+                }
+        } else {
+            self.instructions = []
+        }
         
         if let tagString = try container.decodeIfPresent(String.self, forKey: .tags), !tagString.isEmpty {
             self.tags = tagString.components(separatedBy: ",")
@@ -126,6 +137,8 @@ extension Recipe {
         }
         
         let ingredientsContainer = try decoder.container(keyedBy: DynamicCodingKey.self)
+        
+        // Sometimes duplicate ingredients are received from the API. Should they be removed?
         self.ingredients = try Self.decodeIngredients(container: ingredientsContainer)
     }
     
