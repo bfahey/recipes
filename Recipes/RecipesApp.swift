@@ -10,7 +10,7 @@ import SwiftUI
 
 @main
 struct RecipesApp: App {
-    @StateObject private var model = RecipeModel.preview
+    @StateObject private var model = RecipeModel(api: MealDB())
     
     var body: some Scene {
         WindowGroup {

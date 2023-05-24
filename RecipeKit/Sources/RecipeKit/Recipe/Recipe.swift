@@ -9,8 +9,9 @@ public struct Recipe: Hashable, Identifiable, Decodable {
     public var sourceURL: URL?
     public var imageURL: URL
     public var youTubeURL: URL?
+    public var ingredients: [Ingredient]
     
-    public init(id: String, name: String, area: String? = nil, instructions: String? = nil, tags: [String], sourceURL: URL? = nil, imageURL: URL, youTubeURL: URL? = nil) {
+    public init(id: String, name: String, area: String? = nil, instructions: String? = nil, tags: [String], sourceURL: URL? = nil, imageURL: URL, youTubeURL: URL? = nil, ingredients: [Ingredient] = []) {
         self.id = id
         self.name = name
         self.area = area
@@ -19,10 +20,12 @@ public struct Recipe: Hashable, Identifiable, Decodable {
         self.sourceURL = sourceURL
         self.imageURL = imageURL
         self.youTubeURL = youTubeURL
+        self.ingredients = ingredients
     }
 }
 
 public extension Recipe {
+    static let noRecipe = Recipe(id: "0", name: "No Recipe", tags: [], imageURL: URL(filePath: ""))
     
     static let preview = Recipe(
         id: "1",
@@ -60,6 +63,19 @@ extension Recipe {
         case youTubeURL = "strYoutube"
     }
     
+    struct DynamicCodingKey: CodingKey {
+        var stringValue: String
+        init?(stringValue: String) {
+            self.stringValue = stringValue
+        }
+        
+        var intValue: Int?
+        init?(intValue: Int) {
+            self.stringValue = ""
+            self.intValue = intValue
+        }
+    }
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
@@ -87,5 +103,29 @@ extension Recipe {
         if let youTubeString = try container.decodeIfPresent(String.self, forKey: .youTubeURL) {
             self.youTubeURL = URL(string: youTubeString)
         }
+        
+        let ingredientsContainer = try decoder.container(keyedBy: DynamicCodingKey.self)
+        self.ingredients = try Self.decodeIngredients(container: ingredientsContainer)
+    }
+    
+    private static func decodeIngredients(container: KeyedDecodingContainer<DynamicCodingKey>) throws -> [Ingredient] {
+        let names = try Self.decodeIngredientKeys(container: container, prefix: "strIngredient")
+        let measurements = try Self.decodeIngredientKeys(container: container, prefix: "strMeasure")
+        
+        return zip(names, measurements).map { name, measurent in
+            Ingredient(name: name, measurement: measurent)
+        }
+    }
+    
+    private static func decodeIngredientKeys(container: KeyedDecodingContainer<DynamicCodingKey>, prefix: String) throws -> [String] {
+        return try container.allKeys
+            .filter { $0.stringValue.hasPrefix(prefix) }
+            .sorted(by: { $0.stringValue.caseInsensitiveCompare($1.stringValue) == .orderedAscending })
+            .compactMap { key in
+                guard let string = try container.decodeIfPresent(String.self, forKey: key), !string.isEmpty else {
+                    return nil
+                }
+                return string.trimmingCharacters(in: .whitespacesAndNewlines)
+            }
     }
 }

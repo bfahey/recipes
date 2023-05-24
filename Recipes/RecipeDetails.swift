@@ -9,52 +9,67 @@ import RecipeKit
 import SwiftUI
 
 struct RecipeDetails: View {
-    @Binding var selection: Recipe?
+    @EnvironmentObject var model: RecipeModel
+    
+    @Binding var recipe: Recipe
     @State var headerHeight: CGFloat = 250.0
     
     var body: some View {
-        if let recipe = selection {
-            List {
-                Section {
-                    EmptyView()
-                } header: {
-                    Text(recipe.name)
-                } footer: {
-                    AsyncImage(url: recipe.imageURL) { image in
-                        image.resizable().scaledToFill()
-                            .frame(height: headerHeight)
-                            .clipped()
-                    } placeholder: {
-                        Color(.quaternarySystemFill)
-                    }
-                    .frame(height: headerHeight)
+        List {
+            Section {
+                EmptyView()
+            } header: {
+                Text(recipe.name)
+            } footer: {
+                AsyncImage(url: recipe.imageURL) { image in
+                    image.resizable().scaledToFill()
+                        .frame(height: headerHeight)
+                        .clipped()
+                } placeholder: {
+                    Color(.quaternarySystemFill)
                 }
-                .headerProminence(.increased)
+                .frame(height: headerHeight)
+            }
+            .headerProminence(.increased)
+            if let ingredients = recipe.ingredients {
                 Section {
-                    if let instructions = recipe.instructions {
-                        Text(instructions)
-                            .font(.body)
+                    ForEach(ingredients) { ingredient in
+//                        LabeledContent(ingredient.name.capitalized, value: ingredient.measurement)
+                        IngredientRow(ingredient: ingredient)
                     }
                 } header: {
-                    Text("Instructions")
+                    Text("Ingredients")
                 }
                 .headerProminence(.increased)
             }
-            .listStyle(.plain)
-        } else {
-            Text("Select a recipe")
-                .font(.largeTitle)
-                .foregroundColor(.secondary)
+            Section {
+                if let instructions = recipe.instructions {
+                    Text(instructions)
+                        .font(.body)
+                }
+            } header: {
+                Text("Instructions")
+            }
+            .headerProminence(.increased)
+        }
+        .listStyle(.plain)
+        .task {
+            guard recipe != .noRecipe else { return }
+            do {
+                try await model.fetchRecipe(id: recipe.id)
+            } catch {
+                // handle error
+            }
         }
     }
 }
 
 struct RecipeDetails_Previews: PreviewProvider {
     struct PreviewWrapper: View {
-        @State private var selection: Recipe? = .preview
+        @State private var selection: Recipe = .preview
         
         var body: some View {
-            RecipeDetails(selection: $selection)
+            RecipeDetails(recipe: $selection)
                 .environmentObject(RecipeModel.preview)
         }
     }

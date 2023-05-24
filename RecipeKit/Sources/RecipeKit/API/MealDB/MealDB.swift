@@ -1,13 +1,14 @@
 import Foundation
+import OSLog
 
 public struct MealDB: RecipeAPI {
-    
-    //https://themealdb.com/api/json/v1/1/filter.php?c=Dessert
-    // https://themealdb.com/api/json/v1/1/lookup.php?i=MEAL_ID
+
     public static let defaultBaseURL = URL(string: "https://themealdb.com/api/json/v1/1/")!
     
     let baseURL: URL
     let session: URLSession
+    
+    private let logger = Logger(subsystem: "RecipeKit", category: "MealDB")
     
     public init(baseURL: URL = defaultBaseURL, session: URLSession = .shared) {
         self.baseURL = baseURL
@@ -21,14 +22,36 @@ public struct MealDB: RecipeAPI {
         components.queryItems = [URLQueryItem(name: "c", value: category)]
 
         let request = URLRequest(url: components.url!)
+        logger.debug("GET \(request)")
+        print(request)
         let data = try await perform(request: request)
         let response = try JSONDecoder().decode(MealDBResponse.self, from: data)
+        logger.debug("Loaded \(response.recipes.count) recipes")
+        print(response.recipes)
         
         return response.recipes
     }
     
     public func recipe(id: String) async throws -> Recipe {
-        return Recipe(id: "", name: "", tags: [], imageURL: URL(fileURLWithPath: ""))
+        assert(!id.isEmpty, "ID must not be empty")
+        let url = baseURL.appending(path: "lookup.php")
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        components.queryItems = [URLQueryItem(name: "i", value: id)]
+
+        let request = URLRequest(url: components.url!)
+        logger.debug("GET \(request)")
+        print(request)
+        
+        let data = try await perform(request: request)
+        let response = try JSONDecoder().decode(MealDBResponse.self, from: data)
+        
+        guard let first = response.recipes.first else {
+            throw RecipeError.server("Recipe not found.")
+        }
+        logger.debug("Found \(first.name)")
+        print(first)
+        
+        return first
     }
 }
 

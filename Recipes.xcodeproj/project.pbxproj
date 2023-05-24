@@ -15,6 +15,7 @@
 		356520052A1DA88200B7B138 /* RecipeKit in Frameworks */ = {isa = PBXBuildFile; productRef = 356520042A1DA88200B7B138 /* RecipeKit */; };
 		356520072A1DAB5700B7B138 /* RecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356520062A1DAB5700B7B138 /* RecipeRow.swift */; };
 		356520092A1DB27900B7B138 /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356520082A1DB27900B7B138 /* RecipeDetails.swift */; };
+		35E4A9AB2A1E390A00C2E3A0 /* IngredientRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4A9AA2A1E390A00C2E3A0 /* IngredientRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,9 +25,11 @@
 		351A55E72A1D944F00B8F4C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		351A55EA2A1D944F00B8F4C0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		351A56152A1D955300B8F4C0 /* RecipeKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RecipeKit; sourceTree = "<group>"; };
+		3533AC802A1DCA8B00742345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		356520012A1DA79D00B7B138 /* RecipeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
 		356520062A1DAB5700B7B138 /* RecipeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRow.swift; sourceTree = "<group>"; };
 		356520082A1DB27900B7B138 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
+		35E4A9AA2A1E390A00C2E3A0 /* IngredientRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +65,10 @@
 		351A55E22A1D944F00B8F4C0 /* Recipes */ = {
 			isa = PBXGroup;
 			children = (
+				3533AC802A1DCA8B00742345 /* Info.plist */,
 				351A55E32A1D944F00B8F4C0 /* RecipesApp.swift */,
 				351A55E52A1D944F00B8F4C0 /* ContentView.swift */,
+				35E4A9AA2A1E390A00C2E3A0 /* IngredientRow.swift */,
 				356520012A1DA79D00B7B138 /* RecipeList.swift */,
 				356520082A1DB27900B7B138 /* RecipeDetails.swift */,
 				356520062A1DAB5700B7B138 /* RecipeRow.swift */,
@@ -172,6 +177,7 @@
 				351A55E62A1D944F00B8F4C0 /* ContentView.swift in Sources */,
 				356520022A1DA79D00B7B138 /* RecipeList.swift in Sources */,
 				351A55E42A1D944F00B8F4C0 /* RecipesApp.swift in Sources */,
+				35E4A9AB2A1E390A00C2E3A0 /* IngredientRow.swift in Sources */,
 				356520092A1DB27900B7B138 /* RecipeDetails.swift in Sources */,
 				356520072A1DAB5700B7B138 /* RecipeRow.swift in Sources */,
 			);
@@ -305,7 +311,8 @@
 				DEVELOPMENT_TEAM = N3B8U8PF4N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Recipes/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -338,7 +345,8 @@
 				DEVELOPMENT_TEAM = N3B8U8PF4N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Recipes/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

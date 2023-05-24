@@ -10,17 +10,25 @@ import SwiftUI
 
 struct RecipeList: View {
     @EnvironmentObject var model: RecipeModel
-    @Binding var selection: Recipe?
+    @State private var sort = RecipeSortOrder.name
+    @Binding var selection: Recipe.ID?
+    
+    var sortedRecipes: [Recipe] {
+        model.recipes(sortedBy: sort)
+    }
     
     var body: some View {
         List(selection: $selection) {
-            ForEach(model.recipes) { recipe in
+            ForEach(sortedRecipes) { recipe in
                 NavigationLink(value: recipe) {
                     RecipeRow(recipe: recipe)
                 }
             }
         }
         .navigationTitle("Desserts")
+        .navigationDestination(for: Recipe.self) { recipe in
+            RecipeDetails(recipe: model.recipeBinding(id: recipe.id))
+        }
         .task {
             do {
                 try await model.fetchRecipes()
@@ -33,7 +41,7 @@ struct RecipeList: View {
 
 struct RecipeList_Previews: PreviewProvider {
     struct PreviewWrapper: View {
-        @State private var selection: Recipe? = .preview
+        @State private var selection: Recipe.ID? = Recipe.preview.id
         
         var body: some View {
             RecipeList(selection: $selection)

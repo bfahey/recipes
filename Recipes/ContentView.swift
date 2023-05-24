@@ -9,19 +9,12 @@ import RecipeKit
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selection: Recipe?
-    @State private var path = NavigationPath()
-    
+    @EnvironmentObject var model: RecipeModel
+    @SceneStorage("selection") private var selectedRecipeID: Recipe.ID?
+
     var body: some View {
-        NavigationSplitView {
-            RecipeList(selection: $selection)
-        } detail: {
-            NavigationStack(path: $path) {
-                RecipeDetails(selection: $selection)
-            }
-        }
-        .onChange(of: selection) { _ in
-            path.removeLast(path.count)
+        NavigationStack {
+            RecipeList(selection: $selectedRecipeID)
         }
     }
 }
